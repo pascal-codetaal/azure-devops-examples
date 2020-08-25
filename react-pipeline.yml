@@ -20,7 +20,7 @@ steps:
     displayName: Cache Yarn packages
   ## Run the yarn install/build
   - script: |
-      pushd $(projectFolder) && yarn --frozen-lockfile && popd
+      pushd $(projectFolder) && yarn install --prefer-offline  ./cache &> /dev/null && popd
       pushd $(projectFolder) && yarn build && popd
 
   ## Copy the client to the staging directory
