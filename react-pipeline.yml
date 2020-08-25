@@ -23,7 +23,7 @@ steps:
     displayName: Cache Yarn packages
   ## Run the yarn install/build
   - script: |
-      pushd $(projectFolder) && yarn install --prefer-offline $(YARN_CACHE_FOLDER) &> /dev/null && popd
+      pushd $(projectFolder) && yarn install --prefer-offline $(YARN_CACHE_FOLDER) && popd
       pushd $(projectFolder) && yarn build && popd
 
   ## Copy the client to the staging directory
