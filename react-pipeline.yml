@@ -20,12 +20,16 @@ steps:
         yarn | "$(Agent.OS)"
         yarn
       path: $(YARN_CACHE_FOLDER)
+      cacheHitVar: CACHE_RESTORED
     displayName: Cache Yarn packages
   ## Run the yarn install/build
   - script: |
       pushd $(projectFolder) && yarn install --prefer-offline $(YARN_CACHE_FOLDER) && popd
-      pushd $(projectFolder) && yarn build && popd
+    condition: ne(variables.CACHE_RESTORED, 'true')
 
+  - script: |
+      pushd $(projectFolder) && yarn build && popd
+      
   ## Copy the client to the staging directory
   - task: CopyFiles@2
     inputs:
