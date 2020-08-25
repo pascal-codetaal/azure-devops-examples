@@ -12,6 +12,13 @@ variables:
 
 # define the steps of the build
 steps:
+  - task: CacheBeta@0
+    inputs:
+      key: |
+        $(Agent.OS)
+        $(projectFolder)/yarn.lock
+      path: $(Pipeline.Workspace)/.cache/yarn
+    displayName: "Cache yarn"
   ## Run the yarn install/build
   - script: |
       pushd $(projectFolder) && yarn && popd
