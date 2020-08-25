@@ -15,7 +15,7 @@ variables:
 steps:
   - task: Cache@2
     inputs:
-      key: 'yarn | "$(Agent.OS)" | yarn.lock'
+      key: 'yarn | "$(Agent.OS)" | $(projectFolder)yarn.lock'
       restoreKeys: |
         yarn | "$(Agent.OS)"
         yarn
