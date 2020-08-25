@@ -17,7 +17,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React and pipelines
+            Learn React and pipelines and caching
           </a>
         </header>
       </div>
