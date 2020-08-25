@@ -16,11 +16,14 @@ steps:
   - task: Cache@2
     inputs:
       key: 'yarn | "$(Agent.OS)" | $(projectFolder)/yarn.lock'
+      restoreKeys: |
+        yarn | "$(Agent.OS)"
+        yarn
       path: $(YARN_CACHE_FOLDER)
     displayName: Cache Yarn packages
   ## Run the yarn install/build
   - script: |
-      pushd $(projectFolder) && yarn install --prefer-offline  ./cache &> /dev/null && popd
+      pushd $(projectFolder) && yarn install --prefer-offline $(YARN_CACHE_FOLDER) &> /dev/null && popd
       pushd $(projectFolder) && yarn build && popd
 
   ## Copy the client to the staging directory
